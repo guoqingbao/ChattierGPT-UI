@@ -34,7 +34,7 @@ python -m streamlit run src/main.py
 ```
 
 ### Demo Chat
-<img src="./candle-vllm-demo.gif" width="75%" height="75%" >
+<img src="./candle-vllm-demo.gif" width="95%" height="95%" >
 
 ## Features
 Features marked with "💬" are available in chat.openai.com, those with "🤖" are platform.openai.com features, "🆕" are new features.
