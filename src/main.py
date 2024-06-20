@@ -8,6 +8,9 @@ from chat import Chat
 import streamlit as st
 import openai as oa
 
+oa.api_key = "EMPTY"
+
+oa.base_url = "http://localhost:2000/v1/"
 
 def save_chat_names():
     with open('chats/chat_names.json', 'w') as f:

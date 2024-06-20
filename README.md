@@ -1,4 +1,4 @@
-# ChattierGPT
+# ChattierGPT (for Candle-VLLM)
 A Simple and Powerful UI for the ChatGPT API.
 
 ChattierGPT is a Python application for local use (colab version coming soon) that allows to communicate with the OpenAI ChatGPT API (gpt-3.5-turbo only for now).
@@ -9,11 +9,17 @@ This tool is still in beta, bug reports and improvements are welcome!
 
 ## How to use
 
-### Windows
+### Install Candle-VLLM (assume llama2-7b model weights downloaded)
+```
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+sudo apt install libssl-dev
+sudo apt install pkg-config
+git clone git@github.com:EricLBuehler/candle-vllm.git
+cd candle-vllm
+cargo run --release -- --port 2000 --weight-path /home/llama2_7b/ llama7b --repeat-last-n 64
+```
 
-Coming soon
-
-### From a Python environment
+### Install ChatUI (this repo)
 
 Installation of the required packages:
 
@@ -21,11 +27,14 @@ Installation of the required packages:
 pip install -r requirements.txt
 ```
 
-Launching the UI:
+Launching the ChatUI:
 
 ```
 python -m streamlit run src/main.py
 ```
+
+### Demo Chat
+<img src="./candle-vllm-demo.gif" width="75%" height="75%" >
 
 ## Features
 Features marked with "💬" are available in chat.openai.com, those with "🤖" are platform.openai.com features, "🆕" are new features.

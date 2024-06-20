@@ -3,13 +3,15 @@ import json
 
 import openai as oa
 import tiktoken as tt
+oa.api_key = "EMPTY"
 
+oa.base_url = "http://localhost:2000/v1/"
 class Chat:
-    def __init__(self, created=None, model='gpt-3.5-turbo', context=None, temperature=0.7, top_p=1.0, max_tokens=512,
+    def __init__(self, created=None, model='llama7b', context=None, temperature=0.7, top_p=1.0, max_tokens=512,
                  max_context_tokens=4096, frequency_penalty=0.0, presence_penalty=0.0):
         self.created = int(datetime.now().timestamp()) if created is None else created
         self.model = model
-        self.encoder = tt.encoding_for_model(model)
+        self.encoder = tt.encoding_for_model("gpt-3.5-turbo")
         self.temperature = temperature
         self.top_p = top_p
         self.max_tokens = max_tokens
@@ -44,7 +46,7 @@ class Chat:
             chat = Chat()
             chat.__dict__ = json.load(f)
 
-        chat.encoder = tt.encoding_for_model(chat.model)
+        chat.encoder = tt.encoding_for_model("gpt-3.5-turbo")
 
         return chat
 
@@ -119,8 +121,11 @@ class Chat:
             'presence_penalty': self.presence_penalty,
             'messages': [{'role': m['role'], 'content': m['content']} for m in path]
         }
+        print("\n\n\n", conversation)
+        completion = oa.chat.completions.create(**conversation)
 
-        response = oa.ChatCompletion.create(**conversation)
-        response['choices'][0]['message']['content'] = response['choices'][0]['message']['content'].strip()
+        
+        # response = oa.ChatCompletion.create(**conversation)
+        # response['choices'][0]['message']['content'] = response['choices'][0]['message']['content'].strip()
 
-        return response['choices'][0]['message']['content']
+        return completion.choices[0].message.content
