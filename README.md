@@ -33,6 +33,16 @@ Launching the ChatUI:
 python -m streamlit run src/main.py
 ```
 
+If you experiencing errors like `OSError: [Errno 28] inotify watch limit reached`, you may fix bugs for streamlit by uncommenting:
+
+    # _install_config_watchers(flag_options)
+
+    # _install_pages_watcher(main_script_path)
+
+In File "/usr/local/lib/python3.8/dist-packages/streamlit/web/bootstrap.py", line 381 (assume Python3.8 used)
+
+You may also restart the ChatUI if it does not response.
+
 ### Demo Chat
 <img src="./candle-vllm-demo.gif" width="95%" height="95%" >
 
