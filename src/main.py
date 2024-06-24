@@ -18,6 +18,9 @@ def save_chat_names():
 
 
 def load_chat_names():
+    if not os.path.exists('chats/chat_names.json'):
+        with open('chats/chat_names.json', 'w') as f:
+            f.write("{}") # if no chat history
     with open('chats/chat_names.json', 'r') as f:
         st.session_state['chat_names'] = json.load(f)
 
